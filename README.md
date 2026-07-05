@@ -32,7 +32,7 @@ Para facilitar a correção do trabalho, abaixo está o mapeamento dos requisito
 ## Estrutura do Projeto
 A estrutura do projeto segue o padrão minimalista e limpo da disciplina:
 ```text
-API_loja/
+BACK_END/
 ├── app.py              # Código principal da aplicação Flask e rotas do SQLite
 ├── carga_inicial.sql   # Script SQL contendo a criação das tabelas e os 10 registros de teste
 ├── database.db         # Banco de dados SQLite gerado manualmente pelo usuário
