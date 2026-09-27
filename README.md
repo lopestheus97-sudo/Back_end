@@ -29,16 +29,27 @@ Para facilitar a correção do trabalho, abaixo está o mapeamento dos requisito
 
 ---
 
+## Arquitetura da Solução (Cenário 1)
+Este módulo atua como o **Serviço Secundário Autônomo (Back-End)** na arquitetura de microsserviços do MVP:
+
+![Arquitetura da Solução](imagens/arquitetura.png)
+
+---
+
 ## Estrutura do Projeto
 A estrutura do projeto segue o padrão minimalista e limpo da disciplina:
 ```text
 BACK_END/
-├── app.py              # Código principal da aplicação Flask e rotas do SQLite
-├── carga_inicial.sql   # Script SQL contendo a criação das tabelas e os 10 registros de teste
-├── database.db         # Banco de dados SQLite gerado manualmente pelo usuário
-├── swagger.yaml        # Especificação OpenAPI 3.0.0 com a documentação detalhada das rotas
-├── requirements.txt    # Arquivo com as dependências diretas de instalação do Python
-└── README.md           # Guia de instalação e uso do projeto (este arquivo)
+├── Dockerfile            # Arquivo com as instruções para containerização da API
+├── .dockerignore         # Arquivos ignorados no build do contêiner Docker
+├── app.py                # Código principal da aplicação Flask, rotas e SQLite
+├── carga_inicial.sql     # Script SQL com a criação das tabelas e carga de teste
+├── database.db           # Banco de dados SQLite persistente
+├── swagger.yaml          # Especificação OpenAPI 3.0.0 com a documentação das rotas
+├── requirements.txt      # Arquivo com as dependências diretas de instalação do Python
+├── imagens/              # Recursos gráficos e fluxograma da arquitetura
+│   └── arquitetura.png   # Fluxograma oficial da arquitetura do Cenário 1
+└── README.md             # Guia de instalação e uso do projeto (este arquivo)
 ```
 
 ---
@@ -345,3 +356,35 @@ Atualiza as informações de uma ferramenta existente com base no seu ID.
   "created_at": "2026-07-04 12:00:00"
 }
 ```
+
+---
+
+## Execução via Contêiner Docker
+
+Este componente foi construído como um serviço autônomo e pode ser executado em um contêiner Docker isolado.
+
+### 1. Construir a Imagem Docker
+
+No terminal, dentro da pasta `Back_end`:
+```bash
+docker build -t backend-api .
+```
+
+### 2. Executar o Contêiner
+
+```bash
+docker run -d -p 5000:5000 --name backend-container backend-api
+```
+
+A API estará acessível em:
+- **API Base:** `http://localhost:5000/api`
+- **Documentação Swagger UI:** `http://localhost:5000/swagger`
+- **JSON OpenAPI:** `http://localhost:5000/apispec.json`
+
+### 3. Parar o Contêiner
+
+```bash
+docker stop backend-container
+docker rm backend-container
+```
+

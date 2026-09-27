@@ -2,11 +2,16 @@ import os
 import sqlite3
 from datetime import datetime
 from flask import Flask, request, jsonify, redirect
+from flask_cors import CORS
 from flasgger import Swagger
 import yaml
 
 app = Flask(__name__)
-DATABASE = 'database.db'
+CORS(app)  # Habilita CORS para permitir chamadas da Interface/Front-end
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = os.path.join(BASE_DIR, 'database.db')
+SQL_INIT_FILE = os.path.join(BASE_DIR, 'carga_inicial.sql')
 
 # Conexão com o banco de dados SQLite
 def get_db_connection():
@@ -14,9 +19,23 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+# Garante a criação e carga inicial do banco de dados se necessário
+def init_db():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='produtos'")
+    if not cursor.fetchone():
+        if os.path.exists(SQL_INIT_FILE):
+            with open(SQL_INIT_FILE, 'r', encoding='utf-8') as f:
+                conn.executescript(f.read())
+            conn.commit()
+    conn.close()
+
+init_db()
 
 # Configuração da documentação Swagger (OpenAPI 3.0) com Flasgger
-with open('swagger.yaml', 'r', encoding='utf-8') as f:
+swagger_path = os.path.join(BASE_DIR, 'swagger.yaml')
+with open(swagger_path, 'r', encoding='utf-8') as f:
     swagger_template = yaml.safe_load(f)
 
 # Define a versão do OpenAPI para evitar conflitos com o Swagger 2.0 padrão
