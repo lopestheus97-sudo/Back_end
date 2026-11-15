@@ -1,22 +1,8 @@
 # Ferramentas WEB API
 
-Este projeto é uma API REST desenvolvida como trabalho prático acadêmico para a disciplina de **Desenvolvimento Full Stack Básico**. O sistema gerencia o catálogo de produtos e categorias de uma loja de ferramentas.
+API REST desenvolvida como trabalho prático acadêmico para a disciplina de **Desenvolvimento Full Stack Básico** da pós-graduação em Full Stack da PUC-Rio. O sistema gerencia o catálogo de produtos e categorias de uma loja de ferramentas.
 
-A aplicação foi desenvolvida focando na simplicidade e clareza de código, atendendo os requisitos do projeto, com banco de dados SQLite e documentação com Swagger.
-
----
-
-## Critérios de Avaliação Atendidos
-
-Para facilitar a correção do trabalho, abaixo está o mapeamento dos requisitos solicitados e como foram implementados:
-
-* **Mínimo de 4 Rotas com Flask (Python):** Implementamos **7 rotas** no total, cobrindo o CRUD completo e endpoints adicionais de listagem de categorias e busca de produtos.
-* **Pelo menos uma rota com método POST:** Rota `POST /api/produtos` para inserção de novos produtos no catálogo.
-* **Uso de Banco de Dados SQLite:** Utilização do SQLite (através da biblioteca nativa `sqlite3` do Python).
-* **Múltiplas Tabelas (Inovação):** Uso de duas tabelas relacionais com dados reais sincronizados: `produtos` e `categorias`.
-* **Tratamento de Datas (Inovação):** Registro automático e validação de data e hora de criação dos produtos (`created_at`) no formato datetime.
-* **Funcionalidade Extra (Inovação):** Rota de busca textual (`GET /api/produtos/busca`) usando consultas SQL com operador `LIKE` no SQLite.
-* **Documentação com Swagger (OpenAPI 3.0):** Documentação interativa via **Flasgger/Swagger UI** configurada e acessível diretamente no navegador, contendo descrição, estrutura de requisição/resposta em JSON e códigos de status HTTP (200, 201, 400, 404).
+A aplicação foi desenvolvida com foco na simplicidade e clareza de código, utilizando banco de dados SQLite e documentação interativa com Swagger.
 
 ---
 
@@ -39,7 +25,7 @@ Este módulo atua como o **Serviço Secundário Autônomo (Back-End)** na arquit
 ## Estrutura do Projeto
 A estrutura do projeto segue o padrão minimalista e limpo da disciplina:
 ```text
-BACK_END/
+ferramentas-web-api/
 ├── Dockerfile            # Arquivo com as instruções para containerização da API
 ├── .dockerignore         # Arquivos ignorados no build do contêiner Docker
 ├── app.py                # Código principal da aplicação Flask, rotas e SQLite
@@ -365,7 +351,7 @@ Este componente foi construído como um serviço autônomo e pode ser executado 
 
 ### 1. Construir a Imagem Docker
 
-No terminal, dentro da pasta `Back_end`:
+No terminal, dentro da pasta `ferramentas-web-api`:
 ```bash
 docker build -t backend-api .
 ```
