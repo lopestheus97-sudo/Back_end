@@ -1,0 +1,39 @@
+# ==========================================================================
+# GITIGNORE - BACK_END (FLASK / SQLITE)
+# Impede o versionamento do banco de dados SQLite e arquivos de ambiente
+# ==========================================================================
+
+# Banco de Dados SQLite (Não versionar arquivo binário no Git)
+*.db
+*.sqlite
+*.sqlite3
+database.db
+
+# Cache do Python e arquivos compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambientes virtuais
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.env
+
+# Diretórios de distribuição e build
+dist/
+build/
+*.egg-info/
+
+# Configurações de IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos temporários do Sistema Operacional
+.DS_Store
+Thumbs.db
